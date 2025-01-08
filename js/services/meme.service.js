@@ -48,7 +48,7 @@ function _createImgs() {
 function _createImg(category, urlNum) {
     return {
         id: makeId(),
-        url: `/imgs/${urlNum}.jpg`,
+        url: `imgs/${urlNum}.jpg`,
         keywords: [category]
     }
 }
