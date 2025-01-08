@@ -26,8 +26,10 @@
         <div class="editor">
             <input class="textInput" type="text" placeholder="Type your text here" oninput="onTextInput(this.value)" />
 
-            <input required type="color" form="miterCanvas" value="#000000" onchange="onSetColor(this.value)" />
-
+            <button><input  type="color" form="miterCanvas" value="#000000" onchange="onSetColor(this.value)" />🎨</button>
+            <button class="font-size-up" value ='20' onclick="onUpdateFontSize('+')">+</button>
+            <button class="font-size-up" value ='20' onclick="onUpdateFontSize('-')">-</button>
+            <!-- 
             <select id="size" name="size" onchange="onSetSize(this.value)">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -42,7 +44,7 @@
                 <option value="line">Line</option>
             </select>
 
-            <button onclick="onClearCanvas()">Clear</button>
+            <button onclick="onClearCanvas()">Clear</button> -->
 
 
         </div>

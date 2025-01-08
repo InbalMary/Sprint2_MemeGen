@@ -10,7 +10,7 @@ var gMeme = {
         {
             txt: 'I sometimes eat Falafel',
             size: 20,
-            color: 'red'
+            color: 'black'
         }
     ]
 }
@@ -87,4 +87,22 @@ function setMemeText(txt) {
     if (gMeme.lines[gMeme.selectedLineIdx]) {
         gMeme.lines[gMeme.selectedLineIdx].txt = txt
     }
+}
+
+
+function setColor(color){
+    gMeme.lines[gMeme.selectedLineIdx].color = color
+}
+
+function getColor(){
+    return gMeme.lines[gMeme.selectedLineIdx].color
+}
+
+function setFontSize(fontSize){
+    console.log('onsetsize', fontSize)
+    gMeme.lines[gMeme.selectedLineIdx].size = fontSize
+}
+
+function getFontSize(){
+    return gMeme.lines[gMeme.selectedLineIdx].size
 }
