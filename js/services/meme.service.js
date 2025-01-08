@@ -65,8 +65,8 @@ function getMeme() {
     return gMeme
 }
 
-function setGmem(meme){
-    gMeme  = meme
+function setGmem(meme) {
+    gMeme = meme
 }
 
 function getImgById(imgId) {
@@ -77,7 +77,7 @@ function getImgById(imgId) {
         elImg.src = imgData.url
 
         console.log('Image URL:', elImg.src)
-        
+
         return elImg
     }
     return null
@@ -90,19 +90,32 @@ function setMemeText(txt) {
 }
 
 
-function setColor(color){
+function setColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
-function getColor(){
+function getColor() {
     return gMeme.lines[gMeme.selectedLineIdx].color
 }
 
-function setFontSize(fontSize){
+function setFontSize(fontSize) {
     console.log('onsetsize', fontSize)
     gMeme.lines[gMeme.selectedLineIdx].size = fontSize
 }
 
-function getFontSize(){
+function getFontSize() {
     return gMeme.lines[gMeme.selectedLineIdx].size
+}
+
+function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
+    gMeme.lines.push({
+        txt,
+        size,
+        color
+    })
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+function getCurLineIdx(){
+    return gMeme.selectedLineIdx
 }

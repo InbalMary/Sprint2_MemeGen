@@ -27,8 +27,9 @@
             <input class="textInput" type="text" placeholder="Type your text here" oninput="onTextInput(this.value)" />
 
             <button><input  type="color" form="miterCanvas" value="#000000" onchange="onSetColor(this.value)" />🎨</button>
-            <button class="font-size-up" value ='20' onclick="onUpdateFontSize('+')">+</button>
-            <button class="font-size-up" value ='20' onclick="onUpdateFontSize('-')">-</button>
+            <button class="font-size-up" value ='20' onclick="onUpdateFontSize('+')">➕</button>
+            <button class="font-size-up" value ='20' onclick="onUpdateFontSize('-')">➖</button>
+            <button onclick="onAddLine()">Add Line 📝</button>
             <!-- 
             <select id="size" name="size" onchange="onSetSize(this.value)">
                 <option value="1">1</option>

@@ -35,7 +35,11 @@ console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
         img.onload = function () {
             clearCanvas()
             coverCanvasWithImg(img)
-            renderText(curMeme.lines[curMeme.selectedLineIdx].txt)
+
+            curMeme.lines.forEach((line, idx) => {
+                renderText(line.txt, idx)
+            })
+            
         }
     }
 }
@@ -63,7 +67,7 @@ function renderImgs() {
     document.querySelector('.grid-container').innerHTML = strHtmls.join('')
 }
 
-function renderText(text) {
+function renderText(text, idx) {
 
     gCtx.font = getFontSize() + "px Arial"
     gCtx.fillStyle = getColor()
@@ -71,7 +75,7 @@ function renderText(text) {
     gCtx.textBaseline = "top"
 
     const x = gElCanvas.width / 2
-    const y = 50
+    const y = 50 + idx*50
     gCtx.fillText(text, x, y);
 }
 
@@ -98,6 +102,7 @@ function onResizeCanvas() {
 //////////////////////////////////////////////////////////////////
 function onSetColor(color){
     setColor(color)
+    renderMeme()
 }
 
 function onUpdateFontSize(sign){
@@ -108,6 +113,10 @@ function onUpdateFontSize(sign){
     renderMeme()
 }
 
+function onAddLine() {
+    addLine()
+    renderMeme()
+}
 /////////////////////////////
 //memes handel- download work- but save stil not
 
