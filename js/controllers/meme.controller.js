@@ -11,31 +11,38 @@ function onGallertInit() {
 }
 
 function onIndexInit() {
+
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
     console.log('gCtx', gCtx)
     onResizeCanvas()
-    renderMeme()
 
+    const storedMeme = loadFromStorage(STORAGE_KEY_CHOSEN_IMG)
+    if (storedMeme) {
+        setGmem(storedMeme)
+    }
+    renderMeme()
 }
 
 //render an img on the canvas with a text line
-function renderMeme(txt = 'Enter Your Text Here') {
-    const selectedImage = loadFromStorage(STORAGE_KEY_CHOSEN_IMG)
-    if (!selectedImage) return
-    const img = new Image()
-    img.src = selectedImage
-    img.onload = function () {
-        coverCanvasWithImg(img)
-        renderText(txt)
+function renderMeme() {
+    const curMeme = getMeme()
+    const img = getImgById(curMeme.selectedImgId)
+console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
+    if (img) {
+        img.onload = function () {
+            clearCanvas()
+            coverCanvasWithImg(img)
+            renderText(curMeme.lines[curMeme.selectedLineIdx].txt)
+        }
     }
 }
 
 function onSelectImg(elImg) {
-    const fullUrl = elImg.src
-    const relUrl = fullUrl.replace(window.location.origin, '')
-    setSelecredImg(relUrl)
-    saveToStorage(STORAGE_KEY_CHOSEN_IMG, elImg.src)
+    const selectedImgId = elImg.dataset.id
+    setSelecredImgId(selectedImgId)
+    // renderMeme()
+    saveToStorage(STORAGE_KEY_CHOSEN_IMG, getMeme())
     window.location.href = 'index.html'
     // coverCanvasWithImg(elImg)
 }
@@ -49,7 +56,7 @@ function coverCanvasWithImg(elImg) {
 function renderImgs() {
     var imgs = getImgs(gFilterBy)
     var strHtmls = imgs.map(img => `
-        <img src="${img.url}" alt="" onclick="onSelectImg(this)">
+        <img src="${img.url}" alt="" data-id="${img.id}" onclick="onSelectImg(this)">
         `)
     document.querySelector('.grid-container').innerHTML = strHtmls.join('')
 }
@@ -68,9 +75,9 @@ function renderText(text) {
 
 
 function onTextInput(elInput) {
-    console.log('elInput', elInput)
-
-    renderMeme(elInput)
+    console.log('elInput', elInput.value)
+    setMemeText(elInput)
+    renderMeme()
 }
 
 
