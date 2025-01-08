@@ -26,9 +26,16 @@ function onSetColor(color){
 
 function onUpdateFontSize(sign){
     let fontSize = getFontSize()
-    if(sign === '+') fontSize += 2
-    if(sign === '-') fontSize -= 2
-    setFontSize(fontSize)
+    let curIdxLine = getCurLineIdx()
+    if(sign === '+') {
+        fontSize += 2
+        setFontSize(fontSize, curIdxLine)
+    }
+    if(sign === '-') {
+        fontSize -= 2
+        setFontSize(fontSize, curIdxLine)
+    }
+    
     renderMeme()
 }
 
@@ -54,10 +61,14 @@ function onDownloadCanvas(elLink) {
 }
 
 function onToggeleLine(){
+    var elSearchWindow = document.querySelector('.textInput')
+
     var curIdxLine = getCurLineIdx()
     var totalLinesCount = getTotalLinesCount()
 
     var nextIdx = (curIdxLine + 1) % totalLinesCount
+
+    elSearchWindow.value = getCurTxt(nextIdx)
 
     setCurLineIdx(nextIdx)
     renderMeme()

@@ -4,6 +4,7 @@ var gFilterBy
 let gElCanvas
 let gCtx
 var gMemesGallery = []
+var gCurFramePos = []
 
 const STORAGE_KEY_CHOSEN_IMG = 'chosenImgDB'
 const MY_MEMES_STORAGE_KEY = 'myMemsDB'
@@ -33,7 +34,7 @@ function coverCanvasWithImg(elImg) {
 
 function renderText(text, idx) {
 
-    gCtx.font = getFontSize() + "px Arial"
+    gCtx.font = getFontSize(idx) + "px Arial"
     gCtx.fillStyle = getColor()
     gCtx.textAlign = "center"
     gCtx.textBaseline = "top"
@@ -50,11 +51,35 @@ function renderText(text, idx) {
         const textHeight = getFontSize()
 
         gCtx.strokeRect(x - textWidth / 2 - 10, y - 10, textWidth + 20, textHeight + 20)
+        
+        const frame = {
+            x: x - textWidth / 2 - 10,
+            y: y - 10,
+            width: textWidth + 20,
+            height: textHeight + 20
+        }
+        gCurFramePos[curIdx] = frame
     }
 
     gCtx.fillStyle = gMeme.lines[idx].color
 
     gCtx.fillText(text, x, y)
+}
+
+
+////////////////////////////////////////////////////////////
+
+function onMove(ev){
+    const { offsetX, offsetY, clientX, clientY } = ev
+
+    const txtBox = gCurFramePos.find(txtBox => {
+        return offsetX > txtBox.x && offsetX < txtBox.x + txtBox.width &&
+          offsetY > txtBox.y && offsetY < txtBox.y + txtBox.height
+      })
+
+      if(txtBox){
+        console.log('txtBox', txtBox)
+      }
 }
 
 

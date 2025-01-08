@@ -43,13 +43,13 @@ function getColor() {
     return gMeme.lines[gMeme.selectedLineIdx].color
 }
 
-function setFontSize(fontSize) {
+function setFontSize(fontSize, idx = gMeme.selectedLineIdx) {
     console.log('onsetsize', fontSize)
-    gMeme.lines[gMeme.selectedLineIdx].size = fontSize
+    gMeme.lines[idx].size = fontSize
 }
 
-function getFontSize() {
-    return gMeme.lines[gMeme.selectedLineIdx].size
+function getFontSize(idx = gMeme.selectedLineIdx) {
+    return gMeme.lines[idx].size
 }
 
 function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
@@ -71,4 +71,8 @@ function getTotalLinesCount(){
 
 function setCurLineIdx(newIdx){
     gMeme.selectedLineIdx = newIdx
+}
+
+function getCurTxt(idx){
+    return gMeme.lines[idx].txt
 }
