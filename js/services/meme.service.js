@@ -64,3 +64,11 @@ function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
 function getCurLineIdx(){
     return gMeme.selectedLineIdx
 }
+
+function getTotalLinesCount(){
+    return gMeme.lines.length
+}
+
+function setCurLineIdx(newIdx){
+    gMeme.selectedLineIdx = newIdx
+}

@@ -1,7 +1,6 @@
 'use strict'
 
 function onIndexInit() {
-
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
     console.log('gCtx', gCtx)
@@ -52,4 +51,14 @@ function onDownloadCanvas(elLink) {
     // console.log('gMemesGallery', gMemesGallery)
     // saveToStorage(MY_MEMES_STORAGE_KEY, gMemesGallery)
     // renderMyMemesGallery(gMemesGallery)
+}
+
+function onToggeleLine(){
+    var curIdxLine = getCurLineIdx()
+    var totalLinesCount = getTotalLinesCount()
+
+    var nextIdx = (curIdxLine + 1) % totalLinesCount
+
+    setCurLineIdx(nextIdx)
+    renderMeme()
 }

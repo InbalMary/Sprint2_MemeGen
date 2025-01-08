@@ -40,11 +40,25 @@ function renderText(text, idx) {
 
     const x = gElCanvas.width / 2
     const y = 50 + idx*50
-    gCtx.fillText(text, x, y);
+
+    var curIdx = getCurLineIdx()
+    if (idx === curIdx) {
+        
+        gCtx.strokeStyle = 'blue'
+        gCtx.lineWidth = 2
+        const textWidth = gCtx.measureText(text).width
+        const textHeight = getFontSize()
+
+        gCtx.strokeRect(x - textWidth / 2 - 10, y - 10, textWidth + 20, textHeight + 20)
+    }
+
+    gCtx.fillStyle = gMeme.lines[idx].color
+
+    gCtx.fillText(text, x, y)
 }
 
 
-
+////////////////////////////////////////////////////////////
 
 
 function clearCanvas() {
