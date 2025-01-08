@@ -18,7 +18,7 @@
     </header>
 
     <div class="filter-by">
-        <input class="search" oninput="onSetFilterBy({ title: this.value })" placeholder="Title" type="text">
+        <input class="search" oninput="onSetFilterBy(this.value)" placeholder="Title" type="text">
         <button onclick="onClearSearch()">Clear</button>
         <div class="categories">
             <button onclick="onSelectCategory('happy')">Happy</button>
@@ -51,6 +51,9 @@
         <img src="/imgs/18.jpg" alt=""> -->
     </section>
     <script src="js/services/utilService.service.js"></script>
+    <script src="js/services/gallery.service.js"></script>
+    <script src="js/controllers/gallery.controller.js"></script>
+
     <script src="js/services/meme.service.js"></script>
     <script src="js/controllers/meme.controller.js"></script></body>
 

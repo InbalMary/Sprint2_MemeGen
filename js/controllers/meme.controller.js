@@ -8,24 +8,6 @@ var gMemesGallery = []
 const STORAGE_KEY_CHOSEN_IMG = 'chosenImgDB'
 const MY_MEMES_STORAGE_KEY = 'myMemsDB'
 
-function onGallertInit() {
-    renderImgs()
-}
-
-function onIndexInit() {
-
-    gElCanvas = document.querySelector('canvas')
-    gCtx = gElCanvas.getContext('2d')
-    console.log('gCtx', gCtx)
-    onResizeCanvas()
-
-    const storedMeme = loadFromStorage(STORAGE_KEY_CHOSEN_IMG)
-    if (storedMeme) {
-        setGmem(storedMeme)
-    }
-    renderMeme()
-}
-
 //render an img on the canvas with a text line
 function renderMeme() {
     const curMeme = getMeme()
@@ -44,27 +26,9 @@ console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
     }
 }
 
-function onSelectImg(elImg) {
-    const selectedImgId = elImg.dataset.id
-    setSelecredImgId(selectedImgId)
-    // renderMeme()
-    saveToStorage(STORAGE_KEY_CHOSEN_IMG, getMeme())
-    window.location.href = 'index.html'
-    // coverCanvasWithImg(elImg)
-}
-
 function coverCanvasWithImg(elImg) {
     gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-}
-
-
-function renderImgs() {
-    var imgs = getImgs(gFilterBy)
-    var strHtmls = imgs.map(img => `
-        <img src="${img.url}" alt="" data-id="${img.id}" onclick="onSelectImg(this)">
-        `)
-    document.querySelector('.grid-container').innerHTML = strHtmls.join('')
 }
 
 function renderText(text, idx) {
@@ -80,11 +44,7 @@ function renderText(text, idx) {
 }
 
 
-function onTextInput(elInput) {
-    console.log('elInput', elInput.value)
-    setMemeText(elInput)
-    renderMeme()
-}
+
 
 
 function clearCanvas() {
@@ -100,39 +60,9 @@ function onResizeCanvas() {
 
 
 //////////////////////////////////////////////////////////////////
-function onSetColor(color){
-    setColor(color)
-    renderMeme()
-}
 
-function onUpdateFontSize(sign){
-    let fontSize = getFontSize()
-    if(sign === '+') fontSize += 2
-    if(sign === '-') fontSize -= 2
-    setFontSize(fontSize)
-    renderMeme()
-}
-
-function onAddLine() {
-    addLine()
-    renderMeme()
-}
 /////////////////////////////
-//memes handel- download work- but save stil not
 
-function onDownloadCanvas(elLink) {
-    const dataUrl = gElCanvas.toDataURL()
-
-    elLink.href = dataUrl
-    // Set a name for the downloaded file
-    elLink.download = 'my-perfect-img'
-
-    // console.log('dataUrl', dataUrl)
-    // gMemesGallery.push(dataUrl)
-    // console.log('gMemesGallery', gMemesGallery)
-    // saveToStorage(MY_MEMES_STORAGE_KEY, gMemesGallery)
-    // renderMyMemesGallery(gMemesGallery)
-}
 
 function renderMyMemesGallery(imgs) {
     var strHTML = imgs.map(img => {

@@ -30,6 +30,8 @@
             <button class="font-size-up" value ='20' onclick="onUpdateFontSize('+')">➕</button>
             <button class="font-size-up" value ='20' onclick="onUpdateFontSize('-')">➖</button>
             <button onclick="onAddLine()">Add Line 📝</button>
+            <a href="#" onclick="onDownloadCanvas(this)" download="file-name">Download ⬇️</a>
+            
             <!-- 
             <select id="size" name="size" onchange="onSetSize(this.value)">
                 <option value="1">1</option>
@@ -52,6 +54,11 @@
     </main>
 
     <script src="js/services/utilService.service.js"></script>
+    <script src="js/controllers/main.controller.js"></script>
+    <script src="js/services/main.service.js"></script>
+
+    <script src="js/controllers/gallery.controller.js"></script>
+    <script src="js/services/gallery.service.js"></script>
     <script src="js/services/meme.service.js"></script>
     <script src="js/controllers/meme.controller.js"></script>
 </body>
