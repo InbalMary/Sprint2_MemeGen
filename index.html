@@ -10,10 +10,10 @@
 
 <body onload="onIndexInit()">
     <header>
-        <a href="index.html">memegen</a> 
-        <nav class="header-links">            
-            <a href="gallery.html">Gallery</a> 
-            <a href="memes.html">Memes</a> 
+        <a href="index.html">memegen</a>
+        <nav class="header-links">
+            <a href="gallery.html">Gallery</a>
+            <a href="memes.html">Memes</a>
             <a href="about.html">About</a>
         </nav>
     </header>
@@ -24,27 +24,27 @@
                 ontouchstart="onDown(event)" ontouchmove="onMove(event)" ontouchend="onUp()"></canvas>
         </div>
         <div class="editor">
-            <div class="settings">
+            <input class="textInput" type="text" placeholder="Type your text here" oninput="onTextInput(this.value)" />
 
-                <input required type="color" form="miterCanvas" value="#000000" onchange="onSetColor(this.value)" />
-        
-                <select id="size" name="size" onchange="onSetSize(this.value)">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="5" selected>5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                </select>
-        
-                <select id="shape" name="shape" onchange="onSetShape(this.value)">
-                    <option value="circle" selected>Circle</option>
-                    <option value="square">Square</option>
-                    <option value="line">Line</option>
-                </select>
-        
-                <button onclick="onClearCanvas()">Clear</button>
-        
-            </div>
+            <input required type="color" form="miterCanvas" value="#000000" onchange="onSetColor(this.value)" />
+
+            <select id="size" name="size" onchange="onSetSize(this.value)">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+
+            <select id="shape" name="shape" onchange="onSetShape(this.value)">
+                <option value="circle" selected>Circle</option>
+                <option value="square">Square</option>
+                <option value="line">Line</option>
+            </select>
+
+            <button onclick="onClearCanvas()">Clear</button>
+
+
         </div>
     </main>
 

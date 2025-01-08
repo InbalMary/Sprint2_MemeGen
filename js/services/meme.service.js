@@ -56,3 +56,13 @@ function _createImg(category, urlNum) {
 function _saveCarsToStorage() {
     saveToStorage(STORAGE_KEY, gImgs)
 }
+
+function setSelecredImg(selectedUrl){
+    console.log('url', selectedUrl)
+    const selected = gImgs.find(img => img.url === selectedUrl)
+    gMeme.selectedImgId = selected.id   
+}
+
+function getMeme(){
+    return gMeme
+}

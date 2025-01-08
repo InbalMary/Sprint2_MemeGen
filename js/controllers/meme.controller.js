@@ -1,7 +1,9 @@
 'use strict'
+
 var gFilterBy
 let gElCanvas
 let gCtx
+
 const STORAGE_KEY_CHOSEN_IMG = 'chosenImgDB'
 
 function onGallertInit() {
@@ -18,19 +20,21 @@ function onIndexInit() {
 }
 
 //render an img on the canvas with a text line
-function renderMeme() {
+function renderMeme(txt = 'Enter Your Text Here') {
     const selectedImage = loadFromStorage(STORAGE_KEY_CHOSEN_IMG)
-    if (selectedImage) {
-        const img = new Image()
-        img.src = selectedImage
-        img.onload = function () {
-            coverCanvasWithImg(img)
-            renderText("Enter Your Text Here")
-        }
+    if (!selectedImage) return
+    const img = new Image()
+    img.src = selectedImage
+    img.onload = function () {
+        coverCanvasWithImg(img)
+        renderText(txt)
     }
 }
 
 function onSelectImg(elImg) {
+    const fullUrl = elImg.src
+    const relUrl = fullUrl.replace(window.location.origin, '')
+    setSelecredImg(relUrl)
     saveToStorage(STORAGE_KEY_CHOSEN_IMG, elImg.src)
     window.location.href = 'index.html'
     // coverCanvasWithImg(elImg)
@@ -57,13 +61,22 @@ function renderText(text) {
     gCtx.textAlign = "center"
     gCtx.textBaseline = "top"
 
-
     const x = gElCanvas.width / 2
     const y = 50
     gCtx.fillText(text, x, y);
 }
 
 
+function onTextInput(elInput) {
+    console.log('elInput', elInput)
+
+    renderMeme(elInput)
+}
+
+
+function clearCanvas() {
+    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+}
 
 
 ///////////////////////////////////////////
