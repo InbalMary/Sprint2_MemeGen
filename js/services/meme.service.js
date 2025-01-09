@@ -11,7 +11,9 @@ var gMeme = {
             txtDir: 'center',
             upOrDown: 'middle',
             color: 'black',
-            isDrag: false
+            isDrag: false,
+            x: 50,
+            y: 50
         }
     ]
 }
@@ -88,6 +90,11 @@ function getTxtAlignment(idx = gMeme.selectedLineIdx) {
 
 function setUpOrDown(upOrDown, idx = gMeme.selectedLineIdx){
     gMeme.lines[idx].upOrDown = upOrDown
+    if(upOrDown === 'up') {
+        gMeme.lines[idx].y -= 30
+    } else if (upOrDown === 'down'){
+        gMeme.lines[idx].y += 30
+    }
 }
 
 function getUpOrDown(idx) {
@@ -103,7 +110,9 @@ function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
         txtDir: 'center',
         upOrDown: 'middle',
         color,
-        isDrag: false
+        isDrag: false,
+        x:50,
+        y:50 + gMeme.lines.length * 50
     })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
@@ -133,4 +142,20 @@ function deleteSelectedLine(idx){
     curFramePos.splice(idx, 1)
     console.log('curFramePos-AFTER splice', curFramePos)
 
+}
+
+function setTxtPosition(x, y){
+    gMeme.lines[gMeme.selectedLineIdx].x = x
+    gMeme.lines[gMeme.selectedLineIdx].y = y
+}
+
+function getTxtPosition(idx){
+    console.log('gMeme.lines[idx].y', gMeme.lines[idx].y)
+    var x = gMeme.lines[idx].x
+    var y = gMeme.lines[idx].y 
+    return ({x,y})
+}
+
+function setXcurPos(x){
+    gMeme.lines[gMeme.selectedLineIdx].x = x
 }

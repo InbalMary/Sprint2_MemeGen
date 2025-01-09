@@ -5,7 +5,7 @@ let gElCanvas
 let gCtx
 var gMemesGallery = []
 var gCurFramePos = []
-var gStartPos = null
+// var gStartPos = null
 
 const STORAGE_KEY_CHOSEN_IMG = 'chosenImgDB'
 const MY_MEMES_STORAGE_KEY = 'myMemsDB'
@@ -18,6 +18,7 @@ function onMemeInit(){
 function renderMeme() {
     const curMeme = getMeme()
     console.log('curmeme', curMeme)
+    console.log('gCurFramePos', gCurFramePos)
     const img = getImgById(curMeme.selectedImgId)
 console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
     if (img) {
@@ -40,28 +41,34 @@ function coverCanvasWithImg(elImg) {
 
 function renderText(text, idx) {
 
+    var curMeme = getMeme()
+    const line = curMeme.lines[idx]
+
     const fontSize = getFontSize(idx)
     const fontFamily = getFontFamily(idx)
     const textAlignment = getTxtAlignment(idx)
-    const upOrDown = getUpOrDown(idx)
-    console.log('upOrDown', upOrDown)
+    // const upOrDown = getUpOrDown(idx)
+    // console.log('upOrDown', upOrDown)
     
     gCtx.font = `${fontSize}px ${fontFamily}`
-    gCtx.fillStyle = getColor()
+    gCtx.fillStyle = line.color
     // gCtx.textAlign = "center"
     gCtx.textBaseline = "top"
 
     // const x = gElCanvas.width / 2
     let x
     // const y = 50 + idx*50
-    let y
-    if(upOrDown === 'middle'){
-        y = 50 + idx*50
-    } else if (upOrDown === 'up'){
-        y = 50 + idx*50 -30
-    } else if (upOrDown === 'down'){
-        y = 50 + idx*50 +30
-    }
+    // let y
+    // if(upOrDown === 'middle'){
+    //     y = 50 + idx*50
+    // } else 
+    // if (upOrDown === 'up'){
+    //     // y = 50 + idx*50 -30
+    //     curMeme.lines[idx].y -30
+    // } else if (upOrDown === 'down'){
+    //     curMeme.lines[idx].y +30
+    //     // y = 50 + idx*50 +30
+    // }
 // console.log('y in render', y)
     if(textAlignment === 'center'){
         gCtx.textAlign = 'center'
@@ -73,6 +80,8 @@ function renderText(text, idx) {
         gCtx.textAlign = 'right'
         x = gElCanvas.width - 20
     }
+
+    const y = line.y
 
     var curIdx = getCurLineIdx()
     // setUpdatedPos(curIdx, x, y)
@@ -101,7 +110,7 @@ function renderText(text, idx) {
         }
 
         gCtx.strokeRect(frameX, y - 10, textWidth + 20, textHeight + 20)
-        const frame = {
+        gCurFramePos[curIdx] = {
             x: frameX,
             y: y - 10,
             width: textWidth + 20,
@@ -109,10 +118,10 @@ function renderText(text, idx) {
         }
         
         // console.log('frame', frame)
-        gCurFramePos[curIdx] = frame
+        // gCurFramePos[curIdx] = frame
     }
 
-    gCtx.fillStyle = gMeme.lines[idx].color
+    // gCtx.fillStyle = gMeme.lines[idx].color
 
     gCtx.fillText(text, x, y)
 
