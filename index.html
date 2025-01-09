@@ -10,11 +10,13 @@
 
 <body onload="onIndexInit()" onresize="onResize()">
     <header>
-        <a href="index.html">memegen</a>
+        <a class="logo" href="index.html"><img src="./imgs/logo.png" alt=""></a>
         <nav class="header-links">
-            <a href="gallery.html">Gallery</a>
-            <a href="memes.html">Memes</a>
-            <a href="about.html">About</a>
+            <ul class="header-nav">
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="memes.html">Memes</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>            
         </nav>
     </header>
 
@@ -30,8 +32,8 @@
             <button class="font-size-up" value ='20' onclick="onUpdateFontSize('+')">➕</button>
             <button class="font-size-up" value ='20' onclick="onUpdateFontSize('-')">➖</button>
             <button onclick="onAddLine()">Add Line 📝</button>
-            <a href="#" onclick="onDownloadCanvas(this)" download="file-name">Download ⬇️</a>
-            <button class="toggel-line" onclick="onToggeleLine()">Switch Line</button>
+            <a class="download-link" href="#" onclick="onDownloadCanvas(this)" download="file-name">Download 📩</a>
+            <button class="toggel-line" onclick="onToggeleLine()">Switch Line 🔁</button>
             <!-- 
             <select id="size" name="size" onchange="onSetSize(this.value)">
                 <option value="1">1</option>
