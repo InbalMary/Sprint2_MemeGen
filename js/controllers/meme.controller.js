@@ -43,7 +43,9 @@ function renderText(text, idx) {
     const fontSize = getFontSize(idx)
     const fontFamily = getFontFamily(idx)
     const textAlignment = getTxtAlignment(idx)
-
+    const upOrDown = getUpOrDown(idx)
+    console.log('upOrDown', upOrDown)
+    
     gCtx.font = `${fontSize}px ${fontFamily}`
     gCtx.fillStyle = getColor()
     // gCtx.textAlign = "center"
@@ -51,8 +53,16 @@ function renderText(text, idx) {
 
     // const x = gElCanvas.width / 2
     let x
-    const y = 50 + idx*50
-
+    // const y = 50 + idx*50
+    let y
+    if(upOrDown === 'middle'){
+        y = 50 + idx*50
+    } else if (upOrDown === 'up'){
+        y = 50 + idx*50 -30
+    } else if (upOrDown === 'down'){
+        y = 50 + idx*50 +30
+    }
+// console.log('y in render', y)
     if(textAlignment === 'center'){
         gCtx.textAlign = 'center'
         x = gElCanvas.width / 2
@@ -98,13 +108,16 @@ function renderText(text, idx) {
             height: textHeight + 20,
         }
         
-        console.log('frame', frame)
+        // console.log('frame', frame)
         gCurFramePos[curIdx] = frame
     }
 
     gCtx.fillStyle = gMeme.lines[idx].color
 
     gCtx.fillText(text, x, y)
+
+    
+    // setTxtPosition(getCurFramPos(curIdx))
 }
 
 
@@ -180,7 +193,7 @@ function renderMyMemesGallery(imgs) {
 function checkLoadMemeGallery() {
     var memesGallery = loadFromStorage(MY_MEMES_STORAGE_KEY)
     if (!memesGallery) return
-    console.log('gallery', memesGallery)
+    // console.log('gallery', memesGallery)
     if (memesGallery.length) {
         gMemesGallery = memesGallery
     }
@@ -220,4 +233,9 @@ function loadImageFromInput(ev, onImageReady) {
 function renderImg(img) {
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+
+function getgCurFramePos(){
+    return gCurFramePos
 }

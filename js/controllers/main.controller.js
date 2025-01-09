@@ -3,7 +3,7 @@
 function onIndexInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-    console.log('gCtx', gCtx)
+    // console.log('gCtx', gCtx)
     // onResizeCanvas()
     onResize()
 
@@ -15,7 +15,7 @@ function onIndexInit() {
 }
 
 function onTextInput(elInput) {
-    console.log('elInput', elInput.value)
+    // console.log('elInput', elInput.value)
     setMemeText(elInput)
     renderMeme()
 }
@@ -88,5 +88,17 @@ function onSetFont(elFont){
 function onSetAlignment(direction){
     var curIdxLine = getCurLineIdx()
     setTxtAlignment(direction, curIdxLine)
+    renderMeme()
+}
+
+function onSetUpDown(direction){
+    var curIdxLine = getCurLineIdx()
+    setUpOrDown(direction, curIdxLine)
+    renderMeme()
+}
+
+function onDeleteSelectedLine(){
+    var curIdxLine = getCurLineIdx()
+    deleteSelectedLine(curIdxLine)
     renderMeme()
 }

@@ -9,6 +9,7 @@ var gMeme = {
             size: 20,
             fontFamily: 'Ariel',
             txtDir: 'center',
+            upOrDown: 'middle',
             color: 'black',
             isDrag: false
         }
@@ -59,7 +60,7 @@ function getColor() {
 }
 
 function setFontSize(fontSize, idx = gMeme.selectedLineIdx) {
-    console.log('onsetsize', fontSize)
+    // console.log('onsetsize', fontSize)
     gMeme.lines[idx].size = fontSize
 }
 
@@ -68,7 +69,7 @@ function getFontSize(idx = gMeme.selectedLineIdx) {
 }
 
 function setFontFamily(fontFamily, idx = gMeme.selectedLineIdx) {
-    console.log('onsetfamily', fontFamily)
+    // console.log('onsetfamily', fontFamily)
     gMeme.lines[idx].fontFamily = fontFamily
 }
 
@@ -77,12 +78,21 @@ function getFontFamily(idx = gMeme.selectedLineIdx) {
 }
 
 function setTxtAlignment(txtDir, idx = gMeme.selectedLineIdx) {
-    console.log('txtDir', txtDir)
+    // console.log('txtDir', txtDir)
     gMeme.lines[idx].txtDir = txtDir
 }
 
 function getTxtAlignment(idx = gMeme.selectedLineIdx) {
     return gMeme.lines[idx].txtDir
+}
+
+function setUpOrDown(upOrDown, idx = gMeme.selectedLineIdx){
+    gMeme.lines[idx].upOrDown = upOrDown
+}
+
+function getUpOrDown(idx) {
+    // console.log('gMeme.lines[idx].upOrDown', gMeme.lines[idx].upOrDown)
+    return gMeme.lines[idx].upOrDown
 }
 
 function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
@@ -91,6 +101,7 @@ function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
         size,
         fontFamily: 'Ariel',
         txtDir: 'center',
+        upOrDown: 'middle',
         color,
         isDrag: false
     })
@@ -111,4 +122,15 @@ function setCurLineIdx(newIdx) {
 
 function getCurTxt(idx) {
     return gMeme.lines[idx].txt
+}
+
+function deleteSelectedLine(idx){
+    console.log('idx at del selected', idx)
+    if (idx < 0 || idx >= gMeme.lines.length) return
+    gMeme.lines.splice(idx, 1)
+    var curFramePos = getgCurFramePos()
+    console.log('curFramePos-before splice', curFramePos)
+    curFramePos.splice(idx, 1)
+    console.log('curFramePos-AFTER splice', curFramePos)
+
 }

@@ -10,7 +10,7 @@ function getImgs(optionalFilter) {
     var imgs = gImgs
 
     if (optionalFilter) imgs = _filterByCategory(optionalFilter)
-    console.log('imgs from service', imgs)
+    // console.log('imgs from service', imgs)
     return imgs
 }
 
@@ -47,12 +47,12 @@ function _saveImgsToStorage() {
 
 function getImgById(imgId) {
     const imgData = gImgs.find(img => img.id === imgId)
-    console.log('imgData', imgData)
+    // console.log('imgData', imgData)
     if (imgData) {
         const elImg = new Image()
         elImg.src = imgData.url
 
-        console.log('Image URL:', elImg.src)
+        // console.log('Image URL:', elImg.src)
 
         return elImg
     }
