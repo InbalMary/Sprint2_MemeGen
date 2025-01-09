@@ -10,7 +10,7 @@ var gCurFramePos = []
 const STORAGE_KEY_CHOSEN_IMG = 'chosenImgDB'
 const MY_MEMES_STORAGE_KEY = 'myMemsDB'
 
-function onMemeInit(){
+function onMemeInit() {
     checkLoadMemeGallery()
 }
 
@@ -20,7 +20,7 @@ function renderMeme() {
     console.log('curmeme', curMeme)
     console.log('gCurFramePos', gCurFramePos)
     const img = getImgById(curMeme.selectedImgId)
-console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
+    console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
     if (img) {
         img.onload = function () {
             clearCanvas()
@@ -29,7 +29,7 @@ console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
             curMeme.lines.forEach((line, idx) => {
                 renderText(line.txt, idx)
             })
-            
+
         }
     }
 }
@@ -49,7 +49,7 @@ function renderText(text, idx) {
     const textAlignment = getTxtAlignment(idx)
     // const upOrDown = getUpOrDown(idx)
     // console.log('upOrDown', upOrDown)
-    
+
     gCtx.font = `${fontSize}px ${fontFamily}`
     gCtx.fillStyle = line.color
     // gCtx.textAlign = "center"
@@ -69,14 +69,14 @@ function renderText(text, idx) {
     //     curMeme.lines[idx].y +30
     //     // y = 50 + idx*50 +30
     // }
-// console.log('y in render', y)
-    if(textAlignment === 'center'){
+    // console.log('y in render', y)
+    if (textAlignment === 'center') {
         gCtx.textAlign = 'center'
         x = gElCanvas.width / 2
     } else if (textAlignment === 'left') {
         gCtx.textAlign = 'left'
         x = 20
-    } else if(textAlignment === 'right'){
+    } else if (textAlignment === 'right') {
         gCtx.textAlign = 'right'
         x = gElCanvas.width - 20
     }
@@ -86,7 +86,7 @@ function renderText(text, idx) {
     var curIdx = getCurLineIdx()
     // setUpdatedPos(curIdx, x, y)
     if (idx === curIdx) {
-        
+
         gCtx.strokeStyle = 'blue'
         gCtx.lineWidth = 2
         const textWidth = gCtx.measureText(text).width
@@ -116,7 +116,7 @@ function renderText(text, idx) {
             width: textWidth + 20,
             height: textHeight + 20,
         }
-        
+
         // console.log('frame', frame)
         // gCurFramePos[curIdx] = frame
     }
@@ -125,36 +125,36 @@ function renderText(text, idx) {
 
     gCtx.fillText(text, x, y)
 
-    
+
     // setTxtPosition(getCurFramPos(curIdx))
 }
 
 
 ////////////////////////////////////////////////////////////
 
-function onMove(ev){
-    
+function onMove(ev) {
+
 }
 
-function onDown(ev){
+function onDown(ev) {
     const { offsetX, offsetY, clientX, clientY } = ev
 
     const txtBox = gCurFramePos.find(txtBox => {
         return offsetX > txtBox.x && offsetX < txtBox.x + txtBox.width &&
-          offsetY > txtBox.y && offsetY < txtBox.y + txtBox.height
-      })
+            offsetY > txtBox.y && offsetY < txtBox.y + txtBox.height
+    })
 
-      if(txtBox){
-        const curFrameIdx = gCurFramePos.findIndex(item => 
-            item.x === txtBox.x && 
-            item.y === txtBox.y && 
-            item.width === txtBox.width && 
+    if (txtBox) {
+        const curFrameIdx = gCurFramePos.findIndex(item =>
+            item.x === txtBox.x &&
+            item.y === txtBox.y &&
+            item.width === txtBox.width &&
             item.height === txtBox.height
         )
         console.log('curFrameIdx', curFrameIdx)
         setCurLineIdx(curFrameIdx)
         renderMeme()
-      }
+    }
 }
 
 ////////////////////////////////////////////////////////////
@@ -181,22 +181,39 @@ function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.offsetWidth
     gElCanvas.height = elContainer.offsetHeight
-  }
+}
 //////////////////////////////////////////////////////////////////
 
 /////////////////////////////
 
+function onSaveMeme() {
+    const curMeme = getMeme()
+    const curMemeDeepCopy = JSON.parse(JSON.stringify(curMeme))
+    curMemeDeepCopy.image = saveMemeToImg()
+    gMemesGallery.push(curMemeDeepCopy)
+    saveToStorage(MY_MEMES_STORAGE_KEY, gMemesGallery)
+}
 
-function renderMyMemesGallery(imgs) {
-    var strHTML = imgs.map(img => {
-        return `<article class="meme-gallery" onclick="onImgInput(${img})">  
-        <button onclick="onRemoveImg('${img}')">X</button>
-            <img src="./${img}" onclick="onImgInput(event)">                   
+function saveMemeToImg() {
+    return gElCanvas.toDataURL('image/png')
+}
+
+
+function renderMyMemesGallery(memes) {
+    const strHTML = memes.map(meme => {
+        return `
+        <article class="meme-gallery">  
+            <button onclick="onRemoveImg('${meme.id}')">X</button>
+            <img src="${meme.image}" alt="Saved Meme">                  
         </article>`
     })
-
     document.querySelector('.my-memes-gallery-container').innerHTML = strHTML.join('')
+}
 
+function onRemoveImg(memeId) {
+    gMemesGallery = gMemesGallery.filter(meme => meme.id !== memeId);
+    saveToStorage(MY_MEMES_STORAGE_KEY, gMemesGallery)
+    renderMyMemesGallery(gMemesGallery)
 }
 
 function checkLoadMemeGallery() {
@@ -245,6 +262,6 @@ function renderImg(img) {
 }
 
 
-function getgCurFramePos(){
+function getgCurFramePos() {
     return gCurFramePos
 }
