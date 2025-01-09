@@ -146,6 +146,10 @@ a :hover {
     margin-top: 15px;
   }
 
+  .logo{
+    align-self: flex-start;
+  }
+
   .header-nav {
     flex-direction: column;
     gap: 10px;

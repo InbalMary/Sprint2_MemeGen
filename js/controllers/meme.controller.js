@@ -40,13 +40,29 @@ function coverCanvasWithImg(elImg) {
 
 function renderText(text, idx) {
 
-    gCtx.font = getFontSize(idx) + "px Arial"
+    const fontSize = getFontSize(idx)
+    const fontFamily = getFontFamily(idx)
+    const textAlignment = getTxtAlignment(idx)
+
+    gCtx.font = `${fontSize}px ${fontFamily}`
     gCtx.fillStyle = getColor()
-    gCtx.textAlign = "center"
+    // gCtx.textAlign = "center"
     gCtx.textBaseline = "top"
 
-    const x = gElCanvas.width / 2
+    // const x = gElCanvas.width / 2
+    let x
     const y = 50 + idx*50
+
+    if(textAlignment === 'center'){
+        gCtx.textAlign = 'center'
+        x = gElCanvas.width / 2
+    } else if (textAlignment === 'left') {
+        gCtx.textAlign = 'left'
+        x = 20
+    } else if(textAlignment === 'right'){
+        gCtx.textAlign = 'right'
+        x = gElCanvas.width - 20
+    }
 
     var curIdx = getCurLineIdx()
     // setUpdatedPos(curIdx, x, y)
@@ -55,16 +71,33 @@ function renderText(text, idx) {
         gCtx.strokeStyle = 'blue'
         gCtx.lineWidth = 2
         const textWidth = gCtx.measureText(text).width
-        const textHeight = getFontSize()
+        const textHeight = fontSize
 
-        gCtx.strokeRect(x - textWidth / 2 - 10, y - 10, textWidth + 20, textHeight + 20)
-        
+
+        // gCtx.strokeRect(x - textWidth / 2 - 10, y - 10, textWidth + 20, textHeight + 20)
+        // const frame = {
+        //     x: x - textWidth / 2 - 10,
+        //     y: y - 10,
+        //     width: textWidth + 20,
+        //     height: textHeight + 20
+        // }
+        let frameX
+        if (textAlignment === 'center') {
+            frameX = x - textWidth / 2 - 10
+        } else if (textAlignment === 'left') {
+            frameX = x - 10
+        } else if (textAlignment === 'right') {
+            frameX = x - textWidth - 10
+        }
+
+        gCtx.strokeRect(frameX, y - 10, textWidth + 20, textHeight + 20)
         const frame = {
-            x: x - textWidth / 2 - 10,
+            x: frameX,
             y: y - 10,
             width: textWidth + 20,
-            height: textHeight + 20
+            height: textHeight + 20,
         }
+        
         console.log('frame', frame)
         gCurFramePos[curIdx] = frame
     }

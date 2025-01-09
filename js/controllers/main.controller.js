@@ -74,3 +74,19 @@ function onToggeleLine(){
     setCurLineIdx(nextIdx)
     renderMeme()
 }
+
+function onSetFont(elFont){    
+    var curIdxLine = getCurLineIdx()
+    setFontFamily( elFont.value, curIdxLine)
+    var txt = getCurTxt(curIdxLine)
+    // console.log('elFont.value- txt- idxcur', elFont.value, txt, curIdxLine)
+    renderMeme()
+    // renderText(txt, curIdxLine, elFont.value)
+    
+}
+
+function onSetAlignment(direction){
+    var curIdxLine = getCurLineIdx()
+    setTxtAlignment(direction, curIdxLine)
+    renderMeme()
+}

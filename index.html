@@ -16,7 +16,7 @@
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="memes.html">Memes</a></li>
                 <li><a href="about.html">About</a></li>
-            </ul>            
+            </ul>
         </nav>
     </header>
 
@@ -28,12 +28,25 @@
         <div class="editor">
             <input class="textInput" type="text" placeholder="Type your text here" oninput="onTextInput(this.value)" />
 
-            <button><input  type="color" form="miterCanvas" value="#000000" onchange="onSetColor(this.value)" />🎨</button>
-            <button class="font-size-up" value ='20' onclick="onUpdateFontSize('+')">➕</button>
-            <button class="font-size-up" value ='20' onclick="onUpdateFontSize('-')">➖</button>
+            <button><input type="color" form="miterCanvas" value="#000000"
+                    onchange="onSetColor(this.value)" />🎨</button>
+            <button class="font-size-up" value='20' onclick="onUpdateFontSize('+')">➕</button>
+            <button class="font-size-up" value='20' onclick="onUpdateFontSize('-')">➖</button>
             <button onclick="onAddLine()">Add Line 📝</button>
             <a class="download-link" href="#" onclick="onDownloadCanvas(this)" download="file-name">Download 📩</a>
             <button class="toggel-line" onclick="onToggeleLine()">Switch Line 🔁</button>
+            <select class="font-picker" onchange="onSetFont(this)">
+                <option value="arial">Ariel</option>
+                <option value="david">David</option>
+                <option value="times new  roman">Times New Roman</option>
+                <option value="georgia">Georgia</option>
+                <option value="lucida console">Lucida Console</option>
+                <option value="tahoma">Tahoma</option>                
+            </select>
+            <button class="btn-font" onclick="onSetAlignment('left')">Align left</button>
+            <button class="btn-font" onclick="onSetAlignment('center')">Center</button>
+            <button class="btn-font" onclick="onSetAlignment('right')">Align right</button>
+
             <!-- 
             <select id="size" name="size" onchange="onSetSize(this.value)">
                 <option value="1">1</option>

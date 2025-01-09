@@ -7,6 +7,8 @@ var gMeme = {
         {
             txt: 'I sometimes eat Falafel',
             size: 20,
+            fontFamily: 'Ariel',
+            txtDir: 'center',
             color: 'black',
             isDrag: false
         }
@@ -63,6 +65,24 @@ function setFontSize(fontSize, idx = gMeme.selectedLineIdx) {
 
 function getFontSize(idx = gMeme.selectedLineIdx) {
     return gMeme.lines[idx].size
+}
+
+function setFontFamily(fontFamily, idx = gMeme.selectedLineIdx) {
+    console.log('onsetfamily', fontFamily)
+    gMeme.lines[idx].fontFamily = fontFamily
+}
+
+function getFontFamily(idx = gMeme.selectedLineIdx){
+    return gMeme.lines[idx].fontFamily
+}
+
+function setTxtAlignment(txtDir, idx = gMeme.selectedLineIdx){
+    console.log('txtDir', txtDir)
+    gMeme.lines[idx].txtDir = txtDir
+}
+
+function getTxtAlignment(idx = gMeme.selectedLineIdx){
+    return gMeme.lines[idx].txtDir
 }
 
 function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
