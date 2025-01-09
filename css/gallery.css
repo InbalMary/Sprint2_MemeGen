@@ -23,14 +23,17 @@ header .logo {
 }
 
 .grid-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5em;
-    margin-block: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
 }
 
 .grid-container img {
-    max-width: 15vh;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
 }
 
 .filter-by {
@@ -40,6 +43,7 @@ header .logo {
     align-items: center;
 }
 
-.search-bar{
-    margin-bottom: 20px;;
+.search-bar {
+    margin-bottom: 20px;
+    ;
 }
