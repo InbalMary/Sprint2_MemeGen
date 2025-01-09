@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-    padding: 0px;    
+    padding: 0px;
     background-color: #f1f8ff;
     /* min-height: 100vh; */
 }
@@ -24,11 +24,22 @@ header .logo {
 
 .grid-container {
     display: flex;
-	flex-wrap: wrap;
-	gap: 0.5em;
-	margin-block: 1em;
-  }
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-block: 1em;
+}
 
-  .grid-container img{
+.grid-container img {
     max-width: 15vh;
-  }
+}
+
+.filter-by {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-bar{
+    margin-bottom: 20px;;
+}

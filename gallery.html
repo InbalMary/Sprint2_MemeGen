@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/gallery.css" />
+    <link rel="stylesheet" href="css/main.css" />
     <title>Gallery</title>
 </head>
 
 <body onload="onGallertInit()">
     <header>
-        <a href="index.html">memegen</a> 
-        <nav class="header-links">            
-            <a href="gallery.html">Gallery</a> 
-            <a href="memes.html">Memes</a> 
-            <a href="about.html">About</a>
+        <a class="logo" href="index.html"><img src="./imgs/logo.png" alt=""></a>
+        <nav class="header-links">
+            <ul class="header-nav">
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="memes.html">Memes</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
         </nav>
     </header>
 
     <div class="filter-by">
-        <input class="search" oninput="onSetFilterBy(this.value)" placeholder="Title" type="text">
-        <button onclick="onClearSearch()">Clear</button>
+        <div class="search-bar"><input class="search" oninput="onSetFilterBy(this.value)" placeholder="Title" type="text">
+            <button onclick="onClearSearch()">Clear</button>
+        </div>
         <div class="categories">
             <button onclick="onSelectCategory('happy')">Happy</button>
             <button onclick="onSelectCategory('sad')">Sad</button>
@@ -27,8 +32,8 @@
             <button onclick="onSelectCategory('sarcastic')">Sarcastic</button>
             <button onclick="onSelectCategory('funny')">Funny</button>
         </div>
-        
-        
+
+
     </div>
     <section class="grid-container">
         <!-- <img src="/imgs/1.jpg" alt="">
@@ -55,6 +60,7 @@
     <script src="js/controllers/gallery.controller.js"></script>
 
     <script src="js/services/meme.service.js"></script>
-    <script src="js/controllers/meme.controller.js"></script></body>
+    <script src="js/controllers/meme.controller.js"></script>
+</body>
 
 </html>
