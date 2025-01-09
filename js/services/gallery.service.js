@@ -26,7 +26,7 @@ function _createImgs() {
 
     const categories = ['happy', 'sad', 'crazy', 'sarcastic', 'funny']
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 18; i++) {
         var category = categories[getRandomInt(0, categories.length)]
         gImgs.push(_createImg(category, i + 1))
     }

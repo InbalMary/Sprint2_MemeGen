@@ -4,7 +4,8 @@ function onIndexInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
     console.log('gCtx', gCtx)
-    onResizeCanvas()
+    // onResizeCanvas()
+    onResize()
 
     const storedMeme = loadFromStorage(STORAGE_KEY_CHOSEN_IMG)
     if (storedMeme) {

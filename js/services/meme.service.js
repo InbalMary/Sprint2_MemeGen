@@ -7,14 +7,27 @@ var gMeme = {
         {
             txt: 'I sometimes eat Falafel',
             size: 20,
-            color: 'black'
+            color: 'black',
+            isDrag: false
         }
     ]
 }
 
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
+function setTxtDrag(idx, isDrag) {
+    gMeme.lines[idx].isDrag = isDrag
+}
 
+function isTxtDragging(idx) {
+    return gMeme.lines[idx]?.isDragging || false
+}
+
+function setUpdatedPos(curIdx, dx, dy){
+    if (!gMeme.lines[idx]) return
+    gMeme.lines[curIdx].pos.x += dx
+    gMeme.lines[curIdx].pos.y += dy
+}
 
 function setSelecredImgId(selecteId) {
     gMeme.selectedImgId = selecteId
@@ -56,23 +69,24 @@ function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
     gMeme.lines.push({
         txt,
         size,
-        color
+        color,
+        isDrag: false
     })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 
-function getCurLineIdx(){
+function getCurLineIdx() {
     return gMeme.selectedLineIdx
 }
 
-function getTotalLinesCount(){
+function getTotalLinesCount() {
     return gMeme.lines.length
 }
 
-function setCurLineIdx(newIdx){
+function setCurLineIdx(newIdx) {
     gMeme.selectedLineIdx = newIdx
 }
 
-function getCurTxt(idx){
+function getCurTxt(idx) {
     return gMeme.lines[idx].txt
 }

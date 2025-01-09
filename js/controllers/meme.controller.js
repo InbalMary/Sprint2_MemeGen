@@ -5,6 +5,7 @@ let gElCanvas
 let gCtx
 var gMemesGallery = []
 var gCurFramePos = []
+var gStartPos = null
 
 const STORAGE_KEY_CHOSEN_IMG = 'chosenImgDB'
 const MY_MEMES_STORAGE_KEY = 'myMemsDB'
@@ -58,6 +59,7 @@ function renderText(text, idx) {
             width: textWidth + 20,
             height: textHeight + 20
         }
+        console.log('frame', frame)
         gCurFramePos[curIdx] = frame
     }
 
@@ -98,6 +100,16 @@ function onResizeCanvas() {
 }
 
 
+function onResize() {
+    resizeCanvas()
+    renderMeme()
+}
+
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.offsetWidth
+    gElCanvas.height = elContainer.offsetHeight
+  }
 //////////////////////////////////////////////////////////////////
 
 /////////////////////////////
