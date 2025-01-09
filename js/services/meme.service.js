@@ -23,10 +23,10 @@ function isTxtDragging(idx) {
     return gMeme.lines[idx]?.isDragging || false
 }
 
-function setUpdatedPos(curIdx, dx, dy){
-    if (!gMeme.lines[idx]) return
-    gMeme.lines[curIdx].pos.x += dx
-    gMeme.lines[curIdx].pos.y += dy
+function setUpdatedPos(curIdx, x, y){
+    if (!gMeme.lines[curIdx]) return
+    gMeme.lines[curIdx].pos.x = x
+    gMeme.lines[curIdx].pos.y = y
 }
 
 function setSelecredImgId(selecteId) {

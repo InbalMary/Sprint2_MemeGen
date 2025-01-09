@@ -49,6 +49,7 @@ function renderText(text, idx) {
     const y = 50 + idx*50
 
     var curIdx = getCurLineIdx()
+    // setUpdatedPos(curIdx, x, y)
     if (idx === curIdx) {
         
         gCtx.strokeStyle = 'blue'
@@ -77,6 +78,10 @@ function renderText(text, idx) {
 ////////////////////////////////////////////////////////////
 
 function onMove(ev){
+    
+}
+
+function onDown(ev){
     const { offsetX, offsetY, clientX, clientY } = ev
 
     const txtBox = gCurFramePos.find(txtBox => {
@@ -85,12 +90,16 @@ function onMove(ev){
       })
 
       if(txtBox){
-        console.log('txtBox', txtBox)
+        const curFrameIdx = gCurFramePos.findIndex(item => 
+            item.x === txtBox.x && 
+            item.y === txtBox.y && 
+            item.width === txtBox.width && 
+            item.height === txtBox.height
+        )
+        console.log('curFrameIdx', curFrameIdx)
+        setCurLineIdx(curFrameIdx)
+        renderMeme()
       }
-}
-
-function onDown(ev){
-    
 }
 
 ////////////////////////////////////////////////////////////
