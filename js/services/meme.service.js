@@ -25,7 +25,7 @@ function isTxtDragging(idx) {
     return gMeme.lines[idx]?.isDragging || false
 }
 
-function setUpdatedPos(curIdx, x, y){
+function setUpdatedPos(curIdx, x, y) {
     if (!gMeme.lines[curIdx]) return
     gMeme.lines[curIdx].pos.x = x
     gMeme.lines[curIdx].pos.y = y
@@ -72,23 +72,25 @@ function setFontFamily(fontFamily, idx = gMeme.selectedLineIdx) {
     gMeme.lines[idx].fontFamily = fontFamily
 }
 
-function getFontFamily(idx = gMeme.selectedLineIdx){
+function getFontFamily(idx = gMeme.selectedLineIdx) {
     return gMeme.lines[idx].fontFamily
 }
 
-function setTxtAlignment(txtDir, idx = gMeme.selectedLineIdx){
+function setTxtAlignment(txtDir, idx = gMeme.selectedLineIdx) {
     console.log('txtDir', txtDir)
     gMeme.lines[idx].txtDir = txtDir
 }
 
-function getTxtAlignment(idx = gMeme.selectedLineIdx){
+function getTxtAlignment(idx = gMeme.selectedLineIdx) {
     return gMeme.lines[idx].txtDir
 }
 
 function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
-    gMeme.lines.push({
+    gMeme.lines.push({    
         txt,
         size,
+        fontFamily: 'Ariel',
+        txtDir: 'center',
         color,
         isDrag: false
     })
