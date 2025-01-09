@@ -169,7 +169,7 @@ function renderMyMemesGallery(imgs) {
     var strHTML = imgs.map(img => {
         return `<article class="meme-gallery" onclick="onImgInput(${img})">  
         <button onclick="onRemoveImg('${img}')">X</button>
-            <img src="${img}" onclick="onImgInput(event)">                   
+            <img src="./${img}" onclick="onImgInput(event)">                   
         </article>`
     })
 
