@@ -7,7 +7,7 @@ function onGallertInit() {
 function renderImgs() {
     var imgs = getImgs(gFilterBy)
     var strHtmls = imgs.map(img => `
-        <img src="${img.url}" alt="" data-id="${img.id}" onclick="onSelectImg(this)">
+        <img src="./${img.url}" alt="" data-id="${img.id}" onclick="onSelectImg(this)">
         `)
     document.querySelector('.grid-container').innerHTML = strHtmls.join('')
 }

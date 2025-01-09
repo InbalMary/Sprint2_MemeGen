@@ -10,9 +10,14 @@ var gStartPos = null
 const STORAGE_KEY_CHOSEN_IMG = 'chosenImgDB'
 const MY_MEMES_STORAGE_KEY = 'myMemsDB'
 
+function onMemeInit(){
+    checkLoadMemeGallery()
+}
+
 //render an img on the canvas with a text line
 function renderMeme() {
     const curMeme = getMeme()
+    console.log('curmeme', curMeme)
     const img = getImgById(curMeme.selectedImgId)
 console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
     if (img) {
@@ -84,6 +89,9 @@ function onMove(ev){
       }
 }
 
+function onDown(ev){
+    
+}
 
 ////////////////////////////////////////////////////////////
 
@@ -138,9 +146,7 @@ function checkLoadMemeGallery() {
     renderMyMemesGallery(gMemesGallery)
 }
 
-function onMemeInit(){
-    checkLoadMemeGallery()
-}
+
 
 function onRemoveImg(data) {
     var idx = gMemesGallery.findIndex(img => img === data)
