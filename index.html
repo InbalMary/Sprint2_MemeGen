@@ -9,63 +9,84 @@
 </head>
 
 <body onload="onIndexInit()" onresize="onResize()">
-    <header>
-        <a class="logo" href="index.html"><img src="./imgs/logo.png" alt=""></a>
-        <nav class="header-links">
-            <ul class="header-nav">
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="memes.html">Memes</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="wrapper">
+        <header>
+            <a class="logo" href="index.html"><img src="./imgs/logo.png" alt=""></a>
+            <nav class="header-links">
+                <ul class="header-nav">
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="memes.html">Memes</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <main>
-        <div class="canvas-container">
-            <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)" onmouseup="onUp()"
-                ontouchstart="onDown(event)" ontouchmove="onMove(event)" ontouchend="onUp()"></canvas>
-        </div>
-        <div class="editor">
-            <input class="textInput" type="text" placeholder="Type your text here" oninput="onTextInput(this.value)" />
-
-            <button><input type="color" form="miterCanvas" value="#000000"
-                    onchange="onSetColor(this.value)" />🎨</button>
-            <button class="font-size-up" value='20' onclick="onUpdateFontSize('+')">➕</button>
-            <button class="font-size-up" value='20' onclick="onUpdateFontSize('-')">➖</button>
-            <button onclick="onAddLine()">Add Line 📝</button>
-            <a class="download-link" href="#" onclick="onDownloadCanvas(this)" download="file-name">Download 📩</a>
-            <button class="toggel-line" onclick="onToggeleLine()">Switch Line 🔁</button>
-            <select class="font-picker" onchange="onSetFont(this)">
-                <option value="arial">Ariel</option>
-                <option value="david">David</option>
-                <option value="times new  roman">Times New Roman</option>
-                <option value="georgia">Georgia</option>
-                <option value="lucida console">Lucida Console</option>
-                <option value="tahoma">Tahoma</option>
-            </select>
-            <button class="btn-font" onclick="onSetAlignment('left')">Align left</button>
-            <button class="btn-font" onclick="onSetAlignment('center')">Center</button>
-            <button class="btn-font" onclick="onSetAlignment('right')">Align right</button>
-            <button class="btn-font" onclick="onSetUpDown('up')">Up</button>
-            <button class="btn-font" onclick="onSetUpDown('down')">Down</button>
-            <button class="btn-font" onclick="onDeleteSelectedLine()">Delete Line</button>
-            <button class="btn-font" onclick="onSaveMeme()">Save</button>
-
-            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
-
-            <div class="imojy">
-                <button class="imoji-btn" onclick="onSetImoji('😁')">😁</button>
-                <button class="imoji-btn" onclick="onSetImoji('😍')">😍</button>
-                <button class="imoji-btn" onclick="onSetImoji('🤓')">🤓</button>
-                <button class="imoji-btn" onclick="onSetImoji('😉')">😉</button>
+        <main>
+            <div class="canvas-container">
+                <canvas width="400" height="400" onmousedown="onDown(event)" onmousemove="onMove(event)"
+                    onmouseup="onUp()" ontouchstart="onDown(event)" ontouchmove="onMove(event)"
+                    ontouchend="onUp()"></canvas>
             </div>
+            <div class="editor">
+                <input class="textInput" type="text" placeholder="Type your text here"
+                    oninput="onTextInput(this.value)" />
 
-            <form action="" method="POST" enctype="multipart/form-data" onsubmit="onUploadImg(event)">
-                <input name="img" id="imgData" type="hidden" />
-                <button class="btn" type="submit">Upload to Facebook</button>
-            </form>
-            <div class="share-container"></div>
-        </div>
+                <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+
+                <div>
+                    <button><input type="color" form="miterCanvas" value="#000000"
+                            onchange="onSetColor(this.value)" />🎨</button>
+                    <button class="toggel-line" onclick="onToggeleLine()"><img src="./imgs/switch.png" alt=""></button>
+                </div>
+
+                <div>
+                    <button class="font-size-up" value='20' onclick="onUpdateFontSize('+')"><img src="./imgs/resize-font.png" alt=""></button>
+                    <button class="font-size-up" value='20' onclick="onUpdateFontSize('-')"><img src="./imgs/resize-font (1).png" alt=""></button>
+                    <button class="btn-font" onclick="onSetUpDown('up')"><img src="./imgs/up-arrow_15101184.png" alt=""></button>
+                    <button class="btn-font" onclick="onSetUpDown('down')"><img src="./imgs/down-arrow_15101192.png" alt=""></button>
+                </div>
+
+                <div>
+                    <button onclick="onAddLine()"><img src="./imgs/text.png" alt=""></button>
+                    <button class="btn-font" onclick="onDeleteSelectedLine()"><img src="./imgs/delete-resource.png" alt=""></button>
+                </div>
+
+                <select class="font-picker" onchange="onSetFont(this)">
+                    <option value="arial">Ariel</option>
+                    <option value="david">David</option>
+                    <option value="times new  roman">Times New Roman</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="lucida console">Lucida Console</option>
+                    <option value="tahoma">Tahoma</option>
+                </select>
+
+                <div>
+                    <button class="btn-font" onclick="onSetAlignment('left')"><img src="./imgs/left-align.png" alt=""></button>
+                    <button class="btn-font" onclick="onSetAlignment('center')"><img src="./imgs/center-alignment.png" alt=""></button>
+                    <button class="btn-font" onclick="onSetAlignment('right')"><img src="./imgs/right-align.png" alt=""></button>
+                </div>
+
+                <div class="imojy">
+                    <button class="imoji-btn" onclick="onSetImoji('😁')">😁</button>
+                    <button class="imoji-btn" onclick="onSetImoji('😍')">😍</button>
+                    <button class="imoji-btn" onclick="onSetImoji('🤓')">🤓</button>
+                    <button class="imoji-btn" onclick="onSetImoji('😉')">😉</button>
+                    <button class="imoji-btn" onclick="onSetImoji('🤩')">🤩</button>
+                    <button class="imoji-btn" onclick="onSetImoji('🤔')">🤔</button>
+                </div>
+
+                <div class="sharing">
+                    <button class="btn-font" onclick="onSaveMeme()"><img src="./imgs/save.png" alt=""></button>
+                    <a class="download-link" href="#" onclick="onDownloadCanvas(this)" download="file-name"><img src="./imgs/Downloads-icon.png" alt=""></a>
+
+                    <form action="" method="POST" enctype="multipart/form-data" onsubmit="onUploadImg(event)">
+                        <input name="img" id="imgData" type="hidden" />
+                        <button class="btn" type="submit"><img src="./imgs/facebook_2504903.png" alt=""></button>
+                    </form>
+                    <div class="share-container"></div>
+                </div>
+            </div>
+        </main>
         <!-- 
             <select id="size" name="size" onchange="onSetSize(this.value)">
                 <option value="1">1</option>
@@ -83,9 +104,11 @@
 
             <button onclick="onClearCanvas()">Clear</button> -->
 
+        <footer class="footer">© 2025 MEMEGEN</footer>
+    </div>
 
-        </div>
-    </main>
+
+
 
     <script src="js/services/utilService.service.js"></script>
     <script src="js/controllers/main.controller.js"></script>
