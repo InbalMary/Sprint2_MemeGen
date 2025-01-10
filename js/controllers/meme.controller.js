@@ -187,11 +187,17 @@ function resizeCanvas() {
 /////////////////////////////
 
 function onSaveMeme() {
+    const savedMemes = loadFromStorage(MY_MEMES_STORAGE_KEY) || []
+
     const curMeme = getMeme()
     const curMemeDeepCopy = JSON.parse(JSON.stringify(curMeme))
+    // curMemeDeepCopy.id = makeId()
     curMemeDeepCopy.image = saveMemeToImg()
-    gMemesGallery.push(curMemeDeepCopy)
-    saveToStorage(MY_MEMES_STORAGE_KEY, gMemesGallery)
+
+    savedMemes.push(curMemeDeepCopy)
+    console.log('gMemesGallery', gMemesGallery)
+    saveToStorage(MY_MEMES_STORAGE_KEY, savedMemes)
+    gMemesGallery = savedMemes
 }
 
 function saveMemeToImg() {
@@ -204,7 +210,7 @@ function renderMyMemesGallery(memes) {
         return `
         <article class="meme-gallery">  
             <button onclick="onRemoveImg('${meme.id}')">X</button>
-            <img src="${meme.image}" alt="Saved Meme">                  
+            <img src="${meme.image}" alt="Saved Meme" data-id="${meme.selectedImgId}" onclick="onSelectImg(this, 'memes')">                  
         </article>`
     })
     document.querySelector('.my-memes-gallery-container').innerHTML = strHTML.join('')
@@ -217,22 +223,12 @@ function onRemoveImg(memeId) {
 }
 
 function checkLoadMemeGallery() {
-    var memesGallery = loadFromStorage(MY_MEMES_STORAGE_KEY)
+    const memesGallery = loadFromStorage(MY_MEMES_STORAGE_KEY)
     if (!memesGallery) return
-    // console.log('gallery', memesGallery)
+    console.log('gallery', memesGallery)
     if (memesGallery.length) {
         gMemesGallery = memesGallery
     }
-    saveToStorage(MY_MEMES_STORAGE_KEY, gMemesGallery)
-    renderMyMemesGallery(gMemesGallery)
-}
-
-
-
-function onRemoveImg(data) {
-    var idx = gMemesGallery.findIndex(img => img === data)
-    gMemesGallery.splice(idx, 1)
-    saveToStorage(MY_MEMES_STORAGE_KEY, gMemesGallery)
     renderMyMemesGallery(gMemesGallery)
 }
 
