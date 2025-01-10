@@ -41,7 +41,7 @@
                 <option value="times new  roman">Times New Roman</option>
                 <option value="georgia">Georgia</option>
                 <option value="lucida console">Lucida Console</option>
-                <option value="tahoma">Tahoma</option>                
+                <option value="tahoma">Tahoma</option>
             </select>
             <button class="btn-font" onclick="onSetAlignment('left')">Align left</button>
             <button class="btn-font" onclick="onSetAlignment('center')">Center</button>
@@ -50,7 +50,23 @@
             <button class="btn-font" onclick="onSetUpDown('down')">Down</button>
             <button class="btn-font" onclick="onDeleteSelectedLine()">Delete Line</button>
             <button class="btn-font" onclick="onSaveMeme()">Save</button>
-            <!-- 
+
+            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+
+            <div class="imojy">
+                <button class="imoji-btn" onclick="onSetImoji('😁')">😁</button>
+                <button class="imoji-btn" onclick="onSetImoji('😍')">😍</button>
+                <button class="imoji-btn" onclick="onSetImoji('🤓')">🤓</button>
+                <button class="imoji-btn" onclick="onSetImoji('😉')">😉</button>
+            </div>
+
+            <form action="" method="POST" enctype="multipart/form-data" onsubmit="onUploadImg(event)">
+                <input name="img" id="imgData" type="hidden" />
+                <button class="btn" type="submit">Upload to Facebook</button>
+            </form>
+            <div class="share-container"></div>
+        </div>
+        <!-- 
             <select id="size" name="size" onchange="onSetSize(this.value)">
                 <option value="1">1</option>
                 <option value="2">2</option>

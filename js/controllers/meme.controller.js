@@ -5,6 +5,9 @@ let gElCanvas
 let gCtx
 var gMemesGallery = []
 var gCurFramePos = []
+
+var gIsMouseDown = false
+var gCurrImoji = { shape: '', isOn: false }
 // var gStartPos = null
 
 const STORAGE_KEY_CHOSEN_IMG = 'chosenImgDB'
@@ -137,6 +140,15 @@ function onMove(ev) {
 }
 
 function onDown(ev) {
+    gIsMouseDown = true
+
+    if(gIsMouseDown && gCurrImoji.isOn){
+        gCurrImoji.isOn = false
+        const pos = getEvPos(ev)
+
+        drawImoji(gCurrImoji.shape, pos.x, pos.y)
+        gIsMouseDown = false
+    }
     const { offsetX, offsetY, clientX, clientY } = ev
 
     const txtBox = gCurFramePos.find(txtBox => {
@@ -157,6 +169,44 @@ function onDown(ev) {
     }
 }
 
+function drawImoji(imoji, x, y) {
+    gCtx.lineWidth = 2
+    gCtx.strokeStyle = 'brown'
+    gCtx.fillStyle = 'black'
+    gCtx.font = '40px Arial'
+    gCtx.textAlign = 'center'
+    gCtx.textBaseline = 'middle'
+
+    gCtx.fillText(imoji, x, y)
+    gCtx.strokeText(imoji, x, y)
+}
+
+function onSetImoji(shape) {
+    gCurrImoji = { shape, isOn: true }
+    addLine(shape)
+}
+
+function getEvPos(ev) {
+    const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+
+    console.log('ev.offset', ev.offsetX, ev.offsetY)
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    }
+    if (TOUCH_EVS.includes(ev.type)) {
+        // Prevent triggering the mouse ev
+        ev.preventDefault()
+        // Gets the first touch point
+        ev = ev.changedTouches[0]
+        // Calc the right pos according to the touch screen
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+    }
+    return pos
+}
 ////////////////////////////////////////////////////////////
 
 
@@ -264,4 +314,26 @@ function renderImg(img) {
 
 function getgCurFramePos() {
     return gCurFramePos
+}
+
+/////////////////////////////////////////////////////////////
+function onUploadImg(ev) {
+    ev.preventDefault()
+    const canvasData = gElCanvas.toDataURL('image/jpeg')
+
+    // After a succesful upload, allow the user to share on Facebook
+    function onSuccess(uploadedImgUrl) {
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        console.log('encodedUploadedImgUrl:', encodedUploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+
+        // document.querySelector('.share-container').innerHTML = `
+        // <a href="${uploadedImgUrl}">Uploaded picture</a>
+        // <p>Image url: ${uploadedImgUrl}</p>
+        // <button class="btn-facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}')">
+        //    Share on Facebook  
+        // </button>`
+    }
+
+    uploadImg(canvasData, onSuccess)
 }
