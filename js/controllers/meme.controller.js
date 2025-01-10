@@ -209,17 +209,21 @@ function renderMyMemesGallery(memes) {
     const strHTML = memes.map(meme => {
         return `
         <article class="meme-gallery">  
-            <button onclick="onRemoveImg('${meme.id}')">X</button>
+            <button onclick="onRemoveImg('${meme.selectedImgId}')">X</button>
             <img src="${meme.image}" alt="Saved Meme" data-id="${meme.selectedImgId}" onclick="onSelectImg(this, 'memes')">                  
         </article>`
     })
     document.querySelector('.my-memes-gallery-container').innerHTML = strHTML.join('')
 }
 
+
 function onRemoveImg(memeId) {
-    gMemesGallery = gMemesGallery.filter(meme => meme.id !== memeId);
-    saveToStorage(MY_MEMES_STORAGE_KEY, gMemesGallery)
-    renderMyMemesGallery(gMemesGallery)
+    console.log('memeId on remove', memeId)
+    var savedMemes = loadFromStorage(MY_MEMES_STORAGE_KEY)
+    savedMemes = savedMemes.filter(meme => meme.selectedImgId !== memeId);
+    saveToStorage(MY_MEMES_STORAGE_KEY, savedMemes)
+    renderMyMemesGallery(savedMemes)
+    gMemesGallery = savedMemes
 }
 
 function checkLoadMemeGallery() {
