@@ -1,11 +1,11 @@
 'use strict'
 
 function onGallertInit() {
-    renderImgs()
+    onSelectCategory('all')
 }
 
-function renderImgs() {
-    var imgs = getImgs(gFilterBy)
+function renderImgs(imgs) {
+
     var strHtmls = imgs.map(img => `
         <img src="./${img.url}" alt="" data-id="${img.id}" onclick="onSelectImg(this, 'gallery')">
         `)
@@ -15,12 +15,11 @@ function renderImgs() {
 function onSelectImg(elImg, fromWhere) {
     console.log('fromWhere', fromWhere)
     const selectedImgId = elImg.dataset.id
-    if(fromWhere === 'gallery') 
-    {
+    if (fromWhere === 'gallery') {
         setSelecredImgId(selectedImgId)
         saveToStorage(STORAGE_KEY_CHOSEN_IMG, getMeme())
     }
-    if(fromWhere === 'memes'){
+    if (fromWhere === 'memes') {
         console.log('elImg', elImg)
         const memesGallery = loadFromStorage(MY_MEMES_STORAGE_KEY)
         console.log('memesGallery', memesGallery)
@@ -32,22 +31,32 @@ function onSelectImg(elImg, fromWhere) {
         setGmem(curMeme)
         saveToStorage(STORAGE_KEY_CHOSEN_IMG, curMeme)
         renderMeme()
-        
+
     }
-        
-    
+
+
     window.location.href = 'index.html'
     // coverCanvasWithImg(elImg)
 }
 
-function onSetFilterBy(parameter){
-
+function onSetFilterBy(category) {
+    var imgs = getImgs(category)
+    renderImgs(imgs)
 }
 
-function onClearSearch(){
-
+function onClearSearch() {
+    var elPlaceHolder = document.querySelector('.search-bar')
+    elPlaceHolder.querySelector('input').value = ''
+    var imgs = getImgs()
+    renderImgs(imgs)
 }
 
-function onSelectCategory(category){
-    
+function onSelectCategory(category) {
+    var imgs
+    if (category === 'all') {
+        imgs = getImgs()
+    } else {
+        imgs = getImgs(category)
+    }
+    renderImgs(imgs)
 }

@@ -15,7 +15,7 @@ function getImgs(optionalFilter) {
 }
 
 function _filterByCategory(filterCateg) {
-    return gImgs.filter(img => img.keywords.includes(filterCateg))
+    return gImgs.filter(img => img.keywords[0].includes(filterCateg))
 }
 
 function _createImgs() {
