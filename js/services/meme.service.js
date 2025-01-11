@@ -159,3 +159,17 @@ function getTxtPosition(idx){
 function setXcurPos(x){
     gMeme.lines[gMeme.selectedLineIdx].x = x
 }
+
+function setLineDragable(isDrag) {
+    gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
+  }
+
+function getLineDrag(){
+    return gMeme.lines[gMeme.selectedLineIdx].isDrag
+}
+
+function moveLine(dx, dy) {
+    gMeme.lines[gMeme.selectedLineIdx].x += dx
+    gMeme.lines[gMeme.selectedLineIdx].y += dy
+  
+  }

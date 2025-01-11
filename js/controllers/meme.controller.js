@@ -5,6 +5,7 @@ let gElCanvas
 let gCtx
 var gMemesGallery = []
 var gCurFramePos = []
+// let gStartDragPos
 
 var gIsMouseDown = false
 var gCurrImoji = { shape: '', isOn: false }
@@ -26,7 +27,7 @@ function renderMeme() {
     console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
     if (img) {
         img.onload = function () {
-            
+
             clearCanvas()
             coverCanvasWithImg(img)
 
@@ -68,7 +69,7 @@ function renderText(text, idx, x, y) {
     } else if (textAlignment === 'right') {
         gCtx.textAlign = 'right'
         x = gElCanvas.width - 20
-    } else if(textAlignment === 'dontChange'){
+    } else if (textAlignment === 'dontChange') {
 
     }
 
@@ -112,24 +113,63 @@ function renderText(text, idx, x, y) {
 ////////////////////////////////////////////////////////////
 
 function onMove(ev) {
-
+//     var isDraging = getLineDrag()
+//     if (!isDraging) return
+//     if (isDraging) {
+//         const pos = getEvPos(ev)
+//         const dx = pos.x - gStartDragPos.x
+//         const dy = pos.y - gStartDragPos.y
+//         moveLine(dx, dy)
+//         gStartDragPos = pos
+//         renderMeme()
+//     }
 }
+
+// function onUp() {
+//     var isDraging = getLineDrag()
+//     if (!isDraging) return
+//     if (isDraging) {
+//         console.log('onUp')
+//         setLineDragable(false)
+//         document.body.style.cursor = 'grab'
+//     }
+// }
+
+// function isLineCliked(clickedPos) {
+//     var curIdxLine = getCurLineIdx()
+//     var rect = gCurFramePos[curIdxLine]
+//     console.log('clickedPos', clickedPos)
+//     return (
+//         clickedPos.x >= rect.x &&
+//         clickedPos.x <= rect.x + rect.width &&
+//         clickedPos.y >= rect.y &&
+//         clickedPos.y <= rect.y + rect.height
+//     )
+// }
 
 function onDown(ev) {
     gIsMouseDown = true
+    
+    ///
+    // if (gIsMouseDown && isLineCliked(pos)) {
+    //     setLineDragable(true)
+    //     gStartDragPos = pos
+    //     document.body.style.cursor = 'grabbing'
 
-    if(gIsMouseDown && gCurrImoji.isOn){
+    // }
+    ////
+    if (gIsMouseDown && gCurrImoji.isOn) {
         gCurrImoji.isOn = false
         const pos = getEvPos(ev)
         setTxtPosition(pos.x, pos.y)
         setFontSize(40)
         var curIdx = getCurLineIdx()
-        
+
         setTxtAlignment('dontChange')
 
         renderText(gCurrImoji.shape, curIdx, pos.x, pos.y)
         // drawImoji(gCurrImoji.shape, pos.x, pos.y)
-        
+
         gIsMouseDown = false
     }
     const { offsetX, offsetY, clientX, clientY } = ev
