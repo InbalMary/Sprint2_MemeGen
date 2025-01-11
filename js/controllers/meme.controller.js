@@ -30,7 +30,7 @@ function renderMeme() {
             coverCanvasWithImg(img)
 
             curMeme.lines.forEach((line, idx) => {
-                renderText(line.txt, idx)
+                renderText(line.txt, idx, line.x, line.y)
             })
 
         }
@@ -42,7 +42,7 @@ function coverCanvasWithImg(elImg) {
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function renderText(text, idx) {
+function renderText(text, idx, x, y) {
 
     var curMeme = getMeme()
     const line = curMeme.lines[idx]
@@ -59,7 +59,7 @@ function renderText(text, idx) {
     gCtx.textBaseline = "top"
 
     // const x = gElCanvas.width / 2
-    let x
+    // let x
     // const y = 50 + idx*50
     // let y
     // if(upOrDown === 'middle'){
@@ -84,7 +84,7 @@ function renderText(text, idx) {
         x = gElCanvas.width - 20
     }
 
-    const y = line.y
+    // const y = line.y
 
     var curIdx = getCurLineIdx()
     // setUpdatedPos(curIdx, x, y)
@@ -150,7 +150,7 @@ function onDown(ev) {
         gIsMouseDown = false
     }
     const { offsetX, offsetY, clientX, clientY } = ev
-
+    console.log('gCurFramePos 155', gCurFramePos)
     const txtBox = gCurFramePos.find(txtBox => {
         return offsetX > txtBox.x && offsetX < txtBox.x + txtBox.width &&
             offsetY > txtBox.y && offsetY < txtBox.y + txtBox.height
@@ -179,6 +179,7 @@ function drawImoji(imoji, x, y) {
 
     gCtx.fillText(imoji, x, y)
     gCtx.strokeText(imoji, x, y)
+    setTxtPosition(x, y)
 }
 
 function onSetImoji(shape) {

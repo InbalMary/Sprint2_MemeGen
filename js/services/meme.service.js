@@ -102,7 +102,7 @@ function getUpOrDown(idx) {
     return gMeme.lines[idx].upOrDown
 }
 
-function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
+function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black', x= 50, y = 50 + gMeme.lines.length * 50 ) {
     gMeme.lines.push({    
         txt,
         size,
@@ -111,8 +111,8 @@ function addLine(txt = 'I sometimes eat Falafel', size = 20, color = 'black') {
         upOrDown: 'middle',
         color,
         isDrag: false,
-        x:50,
-        y:50 + gMeme.lines.length * 50
+        x,
+        y
     })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }

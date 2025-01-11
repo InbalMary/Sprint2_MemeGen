@@ -41,8 +41,8 @@ function onUpdateFontSize(sign){
 }
 
 function onAddLine() {
-    const newText = document.querySelector('.textInput').value; // Get the text from the input field
-    textLines = [newText];
+    // const elNewText = document.querySelector('.textInput').value = '' // Get the text from the input field
+    // elNewText.querySelector('input').value = ''
     addLine()
     renderMeme()
 }
