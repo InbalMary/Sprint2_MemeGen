@@ -26,6 +26,7 @@ function renderMeme() {
     console.log('curMeme.lines[curMeme.selectedLineIdx].txt', curMeme)
     if (img) {
         img.onload = function () {
+            
             clearCanvas()
             coverCanvasWithImg(img)
 
@@ -58,21 +59,6 @@ function renderText(text, idx, x, y) {
     // gCtx.textAlign = "center"
     gCtx.textBaseline = "top"
 
-    // const x = gElCanvas.width / 2
-    // let x
-    // const y = 50 + idx*50
-    // let y
-    // if(upOrDown === 'middle'){
-    //     y = 50 + idx*50
-    // } else 
-    // if (upOrDown === 'up'){
-    //     // y = 50 + idx*50 -30
-    //     curMeme.lines[idx].y -30
-    // } else if (upOrDown === 'down'){
-    //     curMeme.lines[idx].y +30
-    //     // y = 50 + idx*50 +30
-    // }
-    // console.log('y in render', y)
     if (textAlignment === 'center') {
         gCtx.textAlign = 'center'
         x = gElCanvas.width / 2
@@ -82,6 +68,8 @@ function renderText(text, idx, x, y) {
     } else if (textAlignment === 'right') {
         gCtx.textAlign = 'right'
         x = gElCanvas.width - 20
+    } else if(textAlignment === 'dontChange'){
+
     }
 
     // const y = line.y
@@ -95,14 +83,6 @@ function renderText(text, idx, x, y) {
         const textWidth = gCtx.measureText(text).width
         const textHeight = fontSize
 
-
-        // gCtx.strokeRect(x - textWidth / 2 - 10, y - 10, textWidth + 20, textHeight + 20)
-        // const frame = {
-        //     x: x - textWidth / 2 - 10,
-        //     y: y - 10,
-        //     width: textWidth + 20,
-        //     height: textHeight + 20
-        // }
         let frameX
         if (textAlignment === 'center') {
             frameX = x - textWidth / 2 - 10
@@ -120,16 +100,12 @@ function renderText(text, idx, x, y) {
             height: textHeight + 20,
         }
 
-        // console.log('frame', frame)
-        // gCurFramePos[curIdx] = frame
     }
 
     // gCtx.fillStyle = gMeme.lines[idx].color
 
     gCtx.fillText(text, x, y)
 
-
-    // setTxtPosition(getCurFramPos(curIdx))
 }
 
 
@@ -145,8 +121,15 @@ function onDown(ev) {
     if(gIsMouseDown && gCurrImoji.isOn){
         gCurrImoji.isOn = false
         const pos = getEvPos(ev)
+        setTxtPosition(pos.x, pos.y)
+        setFontSize(40)
+        var curIdx = getCurLineIdx()
+        
+        setTxtAlignment('dontChange')
 
-        drawImoji(gCurrImoji.shape, pos.x, pos.y)
+        renderText(gCurrImoji.shape, curIdx, pos.x, pos.y)
+        // drawImoji(gCurrImoji.shape, pos.x, pos.y)
+        
         gIsMouseDown = false
     }
     const { offsetX, offsetY, clientX, clientY } = ev
@@ -157,13 +140,14 @@ function onDown(ev) {
     })
 
     if (txtBox) {
+        console.log('txtBox', txtBox)
         const curFrameIdx = gCurFramePos.findIndex(item =>
             item.x === txtBox.x &&
             item.y === txtBox.y &&
             item.width === txtBox.width &&
             item.height === txtBox.height
         )
-        console.log('curFrameIdx', curFrameIdx)
+        console.log('curFrameIdx txtbox', curFrameIdx)
         setCurLineIdx(curFrameIdx)
         renderMeme()
     }
@@ -179,7 +163,7 @@ function drawImoji(imoji, x, y) {
 
     gCtx.fillText(imoji, x, y)
     gCtx.strokeText(imoji, x, y)
-    setTxtPosition(x, y)
+    // setTxtPosition(x, y)
 }
 
 function onSetImoji(shape) {
