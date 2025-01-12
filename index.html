@@ -12,6 +12,7 @@
     <div class="wrapper">
         <header>
             <a class="logo" href="index.html"><img src="./imgs/logo.png" alt=""></a>
+            <button class="hamburger" aria-label="Toggle menu" onclick="onToggleMenu()">☰</button>
             <nav class="header-links">
                 <ul class="header-nav">
                     <li><a href="gallery.html">Gallery</a></li>
@@ -31,39 +32,56 @@
                 <input class="textInput" type="text" placeholder="Type your text here"
                     oninput="onTextInput(this.value)" />
 
-                <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
 
                 <div>
-                    <button><input type="color" form="miterCanvas" value="#000000"
-                            onchange="onSetColor(this.value)" />🎨</button>
+                    <div class="color-picker-container">
+                    <button>    
+                        <label for="color-picker" class="custom-button">
+                            <img src="./imgs/dropper.png" alt="Color Picker" />
+                          </label>
+                    </button>
+                    <input type="color" id="color-picker" form="miterCanvas" onchange="onSetColor(this.value)" style="display:none;" />
+                </div>
+                    <!-- <button><input type="color" form="miterCanvas" value="#000000"
+                            onchange="onSetColor(this.value)" /><img src="./imgs/dropper.png" alt=""></button> -->
                     <button class="toggel-line" onclick="onToggeleLine()"><img src="./imgs/switch.png" alt=""></button>
+                    <button class="btn-font" onclick="onSetAlignment('left')"><img src="./imgs/left-align.png"
+                            alt=""></button>
+                    <button class="btn-font" onclick="onSetAlignment('center')"><img src="./imgs/center-alignment.png"
+                            alt=""></button>
+                    <button class="btn-font" onclick="onSetAlignment('right')"><img src="./imgs/right-align.png"
+                            alt=""></button>
+
                 </div>
 
                 <div>
-                    <button class="font-size-up" value='20' onclick="onUpdateFontSize('+')"><img src="./imgs/resize-font.png" alt=""></button>
-                    <button class="font-size-up" value='20' onclick="onUpdateFontSize('-')"><img src="./imgs/resize-font (1).png" alt=""></button>
-                    <button class="btn-font" onclick="onSetUpDown('up')"><img src="./imgs/up-arrow_15101184.png" alt=""></button>
-                    <button class="btn-font" onclick="onSetUpDown('down')"><img src="./imgs/down-arrow_15101192.png" alt=""></button>
+                    <button class="font-size-up" value='20' onclick="onUpdateFontSize('+')"><img
+                            src="./imgs/resize-font.png" alt=""></button>
+                    <button class="font-size-up" value='20' onclick="onUpdateFontSize('-')"><img
+                            src="./imgs/resize-font (1).png" alt=""></button>
+                    <button class="btn-font" onclick="onSetUpDown('up')"><img src="./imgs/up-arrow_15101184.png"
+                            alt=""></button>
+                    <button class="btn-font" onclick="onSetUpDown('down')"><img src="./imgs/down-arrow_15101192.png"
+                            alt=""></button>
                 </div>
 
                 <div>
                     <button onclick="onAddLine()"><img src="./imgs/text.png" alt=""></button>
-                    <button class="btn-font" onclick="onDeleteSelectedLine()"><img src="./imgs/delete-resource.png" alt=""></button>
+                    <button class="btn-font" onclick="onDeleteSelectedLine()"><img src="./imgs/delete-resource.png"
+                            alt=""></button>
+                    <select class="font-picker" onchange="onSetFont(this)">⬇️
+                        <option value="arial">Ariel</option>
+                        <option value="david">David</option>
+                        <option value="times new  roman">Times New Roman</option>
+                        <option value="georgia">Georgia</option>
+                        <option value="lucida console">Lucida Console</option>
+                        <option value="tahoma">Tahoma</option>
+                    </select>
                 </div>
 
-                <select class="font-picker" onchange="onSetFont(this)">
-                    <option value="arial">Ariel</option>
-                    <option value="david">David</option>
-                    <option value="times new  roman">Times New Roman</option>
-                    <option value="georgia">Georgia</option>
-                    <option value="lucida console">Lucida Console</option>
-                    <option value="tahoma">Tahoma</option>
-                </select>
+
 
                 <div>
-                    <button class="btn-font" onclick="onSetAlignment('left')"><img src="./imgs/left-align.png" alt=""></button>
-                    <button class="btn-font" onclick="onSetAlignment('center')"><img src="./imgs/center-alignment.png" alt=""></button>
-                    <button class="btn-font" onclick="onSetAlignment('right')"><img src="./imgs/right-align.png" alt=""></button>
                 </div>
 
                 <div class="imojy">
@@ -76,8 +94,11 @@
                 </div>
 
                 <div class="sharing">
+                    <button class="upload-btn"><input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" /><img src="./imgs/upload.png" alt=""></button>
+
                     <button class="btn-font" onclick="onSaveMeme()"><img src="./imgs/save.png" alt=""></button>
-                    <a class="download-link" href="#" onclick="onDownloadCanvas(this)" download="file-name"><img src="./imgs/Downloads-icon.png" alt=""></a>
+                    <a class="download-link" href="#" onclick="onDownloadCanvas(this)" download="file-name"><img
+                            src="./imgs/Downloads-icon.png" alt=""></a>
 
                     <form action="" method="POST" enctype="multipart/form-data" onsubmit="onUploadImg(event)">
                         <input name="img" id="imgData" type="hidden" />

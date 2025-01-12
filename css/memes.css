@@ -11,12 +11,18 @@ body {
 
 
 .my-memes-gallery-container {
-    display: flex;
-	flex-wrap: wrap;
-	gap: 0.5em;
-	margin-block: 1em;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .my-memes-gallery-container img{
-    max-width: 15vh;
+      width: 100%;
+      border-radius: 5px;
+      align-self: end;
+      position: relative;
   }

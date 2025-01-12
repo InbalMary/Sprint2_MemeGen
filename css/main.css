@@ -7,7 +7,7 @@ body {
   padding: 0px;
   background-color: #f1f8ff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight:bolder;
+  font-weight: bolder;
   background-color: rgb(250, 248, 166);
 
   /* min-height: 100vh; */
@@ -18,6 +18,7 @@ body {
   flex-direction: column;
   min-height: 100%;
 }
+
 header,
 footer {
   background-color: rgb(247, 246, 206);
@@ -28,7 +29,7 @@ footer {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
 }
 
-footer{
+footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,7 +37,8 @@ footer{
   padding: 10px;
   text-align: center;
 }
-.logo img{
+
+.logo img {
   width: 70px;
 }
 
@@ -48,10 +50,13 @@ footer{
 }
 
 .header-nav {
-  list-style: none;
+  list-style-type: none;
   display: flex;
   gap: 20px;
-  height: 100%;
+}
+
+.header-nav li {
+  margin: 0;
 }
 
 .header-nav li a {
@@ -63,19 +68,20 @@ footer{
   height: 100%;
 }
 
-.header-nav li:not(:last-child) a {
+/* .header-nav li:not(:last-child) a {
   border-right: 2px solid #4e4d44;
-}
+} */
 
 .header-nav li a:hover {
-  background-color: rgb(247, 244, 38);
-  ;
-  border-radius: 5px;
+  background-color: rgb(238, 237, 172);
+  transform: scale(1.05);
+  /* border-radius: 5px; */
 }
 
-img {
+/* img {
   width: 100%;
-}
+  border-radius: 5px;
+} */
 
 main {
   display: flex;
@@ -93,11 +99,12 @@ main {
   background-color: #fff;
   /* width: 60vw; */
   max-height: 100vh;
+  border-radius: 5px;
 }
 
-/* canvas {
-  border: 1px solid black;
-} */
+canvas {
+  border-radius: 5px;
+}
 
 .editor {
   display: flex;
@@ -106,6 +113,10 @@ main {
   gap: 15px;
   width: 100%;
   max-width: 400px;
+  background-color: rgb(234, 232, 180);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
 }
 
 button,
@@ -124,7 +135,7 @@ a {
 button:hover,
 .download-link:hover,
 a :hover {
-  background-color: rgb(247, 244, 38);
+  background-color: rgb(238, 237, 172);
   transform: scale(1.05);
 }
 
@@ -134,7 +145,7 @@ a :hover {
   font-size: 1em;
 }
 
-button img{
+button img {
   width: 30px;
 }
 
@@ -142,15 +153,87 @@ button img{
   width: 30px;
 }
 
-.sharing{
+.sharing {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   gap: 20px;
 }
 
-.about img{
+.about img {
   max-width: 27vw;
+}
+
+.color-picker-container {
+  position: relative;
+  display: inline-block;
+}
+
+input[type="color"] {
+  display: none;
+}
+
+button label {
+  cursor: pointer;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: rgb(220, 19, 19);
+  cursor: pointer;
+}
+
+.textInput {
+  width: 200px;
+  padding: 5px;
+  font-size: 1.1em;
+  color: #313030;
+  background-color: #f9f9f9;
+  border: 4px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.font-picker {
+  width: 100px;
+  padding: 5px;
+  font-size: 1.1em;
+  color: #313030;
+  background-color: #f9f9f9;
+  border: 4px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.upload-btn {
+  position: relative;
+  display: inline-block;
+  padding: 8px 14px;
+  cursor: pointer;
+  width: 62px;
+  height: 50px;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-btn:hover img {
+  transform: scale(1.05);
+}
+
+.imoji-btn{
+  font-size: 20px;
 }
 
 @media screen and (max-width: 500px) {
@@ -169,19 +252,33 @@ button img{
   }
 
   header {
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: flex-end;
     padding: 15px 20px;
     height: auto;
   }
 
   .header-links {
+    display: none;
     width: 100%;
     justify-content: flex-end;
     margin-top: 15px;
   }
 
-  .logo{
+  .hamburger {
+    display: block;
+  }
+  .header-links.active {
+    display: block;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 100;
+}
+
+  .logo {
     align-self: flex-start;
   }
 
@@ -205,26 +302,25 @@ button img{
     gap: 10px;
   }
 
-  .textInput {
-    width: 100%;
-  }
+
 }
 
 
-.about-frame{
+.about-frame {
   display: flex;
-  justify-content:center;
+  justify-content: center;
 }
-.about{
+
+.about {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   gap: 15px;
   width: 80vw;
   color: rgb(221, 132, 7);
 }
 
-.about-img{
+.about-img {
   width: 50%;
 }

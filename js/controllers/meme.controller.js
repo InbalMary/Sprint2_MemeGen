@@ -79,7 +79,7 @@ function renderText(text, idx, x, y) {
     // setUpdatedPos(curIdx, x, y)
     if (idx === curIdx) {
 
-        gCtx.strokeStyle = 'blue'
+        gCtx.strokeStyle = 'lightyellow'
         gCtx.lineWidth = 2
         const textWidth = gCtx.measureText(text).width
         const textHeight = fontSize
@@ -361,4 +361,10 @@ function onUploadImg(ev) {
     }
 
     uploadImg(canvasData, onSuccess)
+}
+
+
+function onToggleMenu() {
+    const nav = document.querySelector('.header-links');
+    nav.classList.toggle('active');
 }
